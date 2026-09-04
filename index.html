@@ -68,21 +68,7 @@
 <!-- LEADERSHIP -->
 <div class="section">
   <div class="section-title">Leadership</div>
-  <div class="grid">
-    <div class="card" onclick="copyEmail(this, 'kligman@repay.com')">
-      <div class="name">Kathy Ligman</div><div class="role">SVP, Product</div>
-      <div class="emails"><div class="email-row"><span class="badge repay">REPAY</span><span class="email-text">kligman@repay.com</span></div></div>
-      <div class="copy-hint">Click to copy REPAY email</div><div class="copied-label">Copied!</div>
-    </div>
-    <div class="card" onclick="copyEmail(this, 'rwatkin@repay.com')">
-      <div class="name">Rick Watkin</div><div class="role">President, KUBRA</div>
-      <div class="emails">
-        <div class="email-row"><span class="badge repay">REPAY</span><span class="email-text">rwatkin@repay.com *</span></div>
-        <div class="email-row"><span class="badge kubra">KUBRA</span><span class="email-text">rick.watkin@kubra.com</span></div>
-      </div>
-      <div class="copy-hint">Click to copy REPAY email</div><div class="copied-label">Copied!</div>
-    </div>
-  </div>
+  <div class="grid" id="exec"></div>
 </div>
 
 <!-- DESIGN LEADERSHIP -->
@@ -147,6 +133,17 @@
 </div>
 
 <script>
+// Leadership — President first, SVPs A-Z by first name, then VP
+const exec = [
+  { name: "Rick Watkin", role: "President, KUBRA", kubra: "rick.watkin@kubra.com", repay: "rwatkin@repay.com", unverified: true },
+  { name: "Harsha Remella", role: "SVP, Engineering, KUBRA", kubra: "sreharsha.remella@kubra.com", repay: "sremella@repay.com" },
+  { name: "Jordan Khamra", role: "SVP, Sales", kubra: "jordan.khamra@kubra.com", repay: "wkhamra@repay.com" },
+  { name: "Kathy Ligman", role: "SVP, Product", kubra: "kathy.ligman@repay.com", repay: "kligman@repay.com" },
+  { name: "Nish Bandara", role: "SVP, Client Services & Solutions Architecture", kubra: "nishantha.bandara@kubra.com", repay: "nbandara@repay.com", unverified: true },
+  { name: "Steve Ryan", role: "SVP, Client Experience, KUBRA", kubra: "steve.ryan@kubra.com", repay: "sryan@repay.com", unverified: true },
+  { name: "Jamel Singleton", role: "VP of Product Design, KUBRA", kubra: "jamel.singleton@kubra.com", repay: "jsingleton@repay.com" },
+];
+
 // Design Leadership — Team Leads A-Z by first name, Shawna (Ops) last
 const designLeadership = [
   { name: "Amber Lawson", role: "Team Lead, UX Writing", kubra: "amber.lawson@kubra.com", repay: "amlawson@repay.com" },
@@ -201,9 +198,8 @@ const pm = [
   { name: "Zira Jauni", role: "Product Manager", kubra: "zira.jauni@kubra.com", repay: "zjauni@repay.com", unverified: true },
 ];
 
-// Technology — SVP first, VPs A-Z by first name, Senior Manager last
+// Technology — VPs A-Z by first name, Senior Manager last
 const tech = [
-  { name: "Harsha Remella", role: "SVP, Engineering, KUBRA", kubra: "sreharsha.remella@kubra.com", repay: "sremella@repay.com" },
   { name: "Judes Soosaithasan", role: "Vice President, Payments Engineering", kubra: "judes.soosaithasan@kubra.com", repay: "sjudes@repay.com" },
   { name: "Mihaela Pitigoi", role: "Vice President, Consumer Experience Engineering", kubra: "mihaela.pitigoi@kubra.com", repay: "mpitigoi@repay.com", unverified: true },
   { name: "Peter Williams", role: "Vice President, Product Engineering", kubra: "peter.williams@kubra.com", repay: "pwilliams@repay.com", unverified: true },
@@ -212,11 +208,8 @@ const tech = [
   { name: "Dhruv Shukla", role: "Senior Manager, Product Engineering", kubra: "dhruv.shukla@kubra.com", repay: "dshukla@repay.com", unverified: true },
 ];
 
-// CX Team — SVPs A-Z by first name, VP, Senior Directors A-Z, others A-Z
+// CX Team — VP first, Senior Directors A-Z, others A-Z
 const cx = [
-  { name: "Jordan Khamra", role: "SVP, Sales", kubra: "jordan.khamra@kubra.com", repay: "wkhamra@repay.com" },
-  { name: "Nish Bandara", role: "SVP, Client Services & Solutions Architecture", kubra: "nishantha.bandara@kubra.com", repay: "nbandara@repay.com", unverified: true },
-  { name: "Steve Ryan", role: "SVP, Client Experience, KUBRA", kubra: "steve.ryan@kubra.com", repay: "sryan@repay.com", unverified: true },
   { name: "Tara Mondelli", role: "Vice President, Client Success", kubra: "tara.mondelli@kubra.com", repay: "tmondelli@repay.com", unverified: true },
   { name: "Anthony Mancini", role: "Senior Director, Client Success", kubra: "anthony.mancini@kubra.com", repay: "amancini@repay.com", unverified: true },
   { name: "Erind Shkurti", role: "Senior Director, Client Solutions", kubra: "erind.shkurti@kubra.com", repay: "eshkurti@repay.com" },
@@ -257,6 +250,7 @@ const sourcing = [
   { name: "Suneeta Vinod", role: "Manager, Strategic Sourcing", kubra: "suneeta.vinod@kubra.com", repay: "svinod@repay.com", unverified: true },
 ];
 
+document.getElementById('exec').innerHTML = exec.map(makeCard).join('');
 document.getElementById('leadership').innerHTML = designLeadership.map(makeCard).join('');
 document.getElementById('ux-design').innerHTML = uxDesign.map(makeCard).join('');
 document.getElementById('ux-research').innerHTML = uxResearch.map(makeCard).join('');
