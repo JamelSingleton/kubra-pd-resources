@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Design — Email Cheat Sheet</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f0f4f8; color: #1a2332; padding: 32px 24px; min-height: 100vh; }
+  header { margin-bottom: 32px; }
+  header h1 { font-size: 22px; font-weight: 700; color: #0093C9; letter-spacing: -0.3px; }
+  header p { font-size: 13px; color: #536372; margin-top: 4px; }
+  .section { margin-bottom: 28px; }
+  .section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #536372; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid #d1dbe6; }
+  .subsection { margin-bottom: 20px; }
+  .subsection-title { font-size: 11px; font-weight: 600; color: #0093C9; margin-bottom: 8px; padding-left: 2px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; }
+  .card { background: #ffffff; border-radius: 8px; padding: 12px 14px; border: 1px solid #e2eaf2; cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s; }
+  .card:hover { border-color: #0093C9; box-shadow: 0 2px 8px rgba(0,147,201,0.12); }
+  .card.copied { border-color: #22c55e; background: #f0fdf4; }
+  .name { font-size: 13px; font-weight: 600; color: #1a2332; margin-bottom: 2px; }
+  .role { font-size: 11px; color: #536372; margin-bottom: 8px; }
+  .emails { display: flex; flex-direction: column; gap: 4px; }
+  .email-row { display: flex; align-items: center; gap: 6px; }
+  .badge { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 2px 5px; border-radius: 3px; min-width: 42px; text-align: center; }
+  .badge.kubra { background: #e6f5fb; color: #0093C9; }
+  .badge.repay { background: #eef2ff; color: #4f46e5; }
+  .email-text { font-size: 12px; color: #334155; font-family: 'Courier New', monospace; }
+  .copy-hint { font-size: 10px; color: #94a3b8; margin-top: 6px; }
+  .copied-label { display: none; font-size: 10px; color: #22c55e; font-weight: 600; margin-top: 6px; }
+  .card.copied .copy-hint { display: none; }
+  .card.copied .copied-label { display: block; }
+  .group-row { background: #ffffff; border-radius: 8px; padding: 12px 14px; border: 1px solid #e2eaf2; cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s; display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+  .group-row:hover { border-color: #0093C9; box-shadow: 0 2px 8px rgba(0,147,201,0.12); }
+  .group-row.copied { border-color: #22c55e; background: #f0fdf4; }
+  .group-emails { font-size: 11px; color: #94a3b8; font-family: 'Courier New', monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 400px; }
+  .copy-btn { flex-shrink: 0; font-size: 11px; font-weight: 600; color: #0093C9; background: #e6f5fb; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; transition: background 0.15s; }
+  .copy-btn:hover { background: #cceaf7; }
+  .group-row.copied .copy-btn { color: #22c55e; background: #dcfce7; }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } .group-emails { max-width: 180px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Product Design — Email Cheat Sheet</h1>
+  <p>Click any card to copy the REPAY email (or KUBRA if no REPAY exists). Unverified REPAY emails marked with *</p>
+</header>
+
+<!-- GROUP COPY ROWS -->
+<div class="section">
+  <div class="section-title">Copy All — Group Addresses</div>
+  <div class="group-row" onclick="copyGroup(this, 'productdesign@kubra.com')">
+    <div><div class="name">Product Design (Group)</div><div class="group-emails">productdesign@kubra.com</div></div>
+    <button class="copy-btn">Copy</button>
+  </div>
+  <div class="group-row" onclick="copyGroup(this, 'amlawson@repay.com, cmishra@repay.com, dmah@repay.com, nrobinson@repay.com, skays@repay.com')">
+    <div><div class="name">Design Leadership (REPAY)</div><div class="group-emails">amlawson, cmishra, dmah, nrobinson, skays @repay.com</div></div>
+    <button class="copy-btn">Copy</button>
+  </div>
+  <div class="group-row" onclick="copyGroup(this, 'amber.lawson@kubra.com, chandrani.mishra@kubra.com, deny.mah@kubra.com, neil.robinson@kubra.com, shawna.kays@kubra.com')">
+    <div><div class="name">Design Leadership (KUBRA)</div><div class="group-emails">amber.lawson, chandrani.mishra, deny.mah, neil.robinson, shawna.kays @kubra.com</div></div>
+    <button class="copy-btn">Copy</button>
+  </div>
+</div>
+
+<!-- LEADERSHIP -->
+<div class="section">
+  <div class="section-title">Leadership</div>
+  <div class="grid">
+    <div class="card" onclick="copyEmail(this, 'kligman@repay.com')">
+      <div class="name">Kathy Ligman</div><div class="role">SVP, Product</div>
+      <div class="emails"><div class="email-row"><span class="badge repay">REPAY</span><span class="email-text">kligman@repay.com</span></div></div>
+      <div class="copy-hint">Click to copy REPAY email</div><div class="copied-label">Copied!</div>
+    </div>
+    <div class="card" onclick="copyEmail(this, 'rwatkin@repay.com')">
+      <div class="name">Rick Watkin</div><div class="role">President, KUBRA</div>
+      <div class="emails">
+        <div class="email-row"><span class="badge repay">REPAY</span><span class="email-text">rwatkin@repay.com *</span></div>
+        <div class="email-row"><span class="badge kubra">KUBRA</span><span class="email-text">rick.watkin@kubra.com</span></div>
+      </div>
+      <div class="copy-hint">Click to copy REPAY email</div><div class="copied-label">Copied!</div>
+    </div>
+  </div>
+</div>
+
+<!-- DESIGN LEADERSHIP -->
+<div class="section">
+  <div class="section-title">Design Leadership</div>
+  <div class="grid" id="leadership"></div>
+</div>
+
+<!-- PRODUCT DESIGN -->
+<div class="section">
+  <div class="section-title">Product Design</div>
+
+  <div class="subsection">
+    <div class="subsection-title">UX Design</div>
+    <div class="grid" id="ux-design"></div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">UX Research</div>
+    <div class="grid" id="ux-research"></div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">UX Writing</div>
+    <div class="grid" id="ux-writing"></div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">Visual Design</div>
+    <div class="grid" id="visual-design"></div>
+  </div>
+</div>
+
+<!-- CROSS-FUNCTIONAL COLLABORATORS -->
+<div class="section">
+  <div class="section-title">Cross-Functional Collaborators</div>
+
+  <div class="subsection">
+    <div class="subsection-title">Product Management</div>
+    <div class="grid" id="pm"></div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">Technology</div>
+    <div class="grid" id="tech"></div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">CX Team</div>
+    <div class="grid" id="cx"></div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">Legal</div>
+    <div class="grid" id="legal"></div>
+  </div>
+
+  <div class="subsection">
+    <div class="subsection-title">Sourcing</div>
+    <div class="grid" id="sourcing"></div>
+  </div>
+</div>
+
+<script>
+// Design Leadership — Team Leads A-Z by first name, Shawna (Ops) last
+const designLeadership = [
+  { name: "Amber Lawson", role: "Team Lead, UX Writing", kubra: "amber.lawson@kubra.com", repay: "amlawson@repay.com" },
+  { name: "Chandrani Mishra", role: "Team Lead, UX Research", kubra: "chandrani.mishra@kubra.com", repay: "cmishra@repay.com" },
+  { name: "Deny Mah", role: "Team Lead, Visual Design", kubra: "deny.mah@kubra.com", repay: "dmah@repay.com" },
+  { name: "Neil Robinson", role: "Team Lead, UX", kubra: "neil.robinson@kubra.com", repay: "nrobinson@repay.com" },
+  { name: "Shawna Kays", role: "Design Ops Specialist", kubra: "shawna.kays@kubra.com", repay: "skays@repay.com" },
+];
+
+// UX Design — Seniors first A-Z by first name, then rest A-Z by first name
+const uxDesign = [
+  { name: "Ban Nguyen", role: "Senior UX Designer", kubra: "ban.nguyen@kubra.com", repay: "bnguyen@repay.com" },
+  { name: "Margaret Payne", role: "Senior UX Designer", kubra: "margaret.payne@kubra.com", repay: "mpayne@repay.com" },
+  { name: "Ashling McNeill", role: "UX Designer", kubra: "ashling.mcneill@kubra.com", repay: "amcneill@repay.com" },
+  { name: "Maxine Yang", role: "UX Designer", kubra: "maxine.yang@kubra.com", repay: "myang@repay.com" },
+  { name: "Nivina Baldwin", role: "UX Designer", kubra: "nivina.baldwin@kubra.com", repay: "nbaldwin@repay.com" },
+  { name: "Vaishak Pandian", role: "UX Designer", kubra: "vaishak.pandian@kubra.com", repay: "vpandian@repay.com" },
+];
+
+// UX Research — A-Z by first name
+const uxResearch = [
+  { name: "Akshay Kumbhar", role: "UX Researcher", kubra: "akshay.kumbhar@kubra.com", repay: "akumbhar@repay.com" },
+  { name: "Claire Scheikl", role: "UX Researcher", kubra: "claire.scheikl@kubra.com", repay: "cscheikl@repay.com" },
+];
+
+// UX Writing — A-Z by first name
+const uxWriting = [
+  { name: "Hannah Taylor", role: "UX Writer", kubra: "hannah.taylor@kubra.com", repay: "hataylor@repay.com" },
+  { name: "Hayden Harrison", role: "UX Writer", kubra: "hayden.harrison@kubra.com", repay: "hharrison@repay.com" },
+  { name: "Miriam El Abbassi", role: "UX Writer", kubra: "miriam.elabbassi@kubra.com", repay: "melabbassi@repay.com" },
+];
+
+// Visual Design — Senior first, then A-Z by first name
+const visualDesign = [
+  { name: "Ali Dib", role: "Senior Visual Designer", kubra: "ali.dib@kubra.com", repay: "adib@repay.com" },
+  { name: "Alexis Bojorquez", role: "Visual Designer", kubra: "alexis.bojorquez@kubra.com", repay: "abojorquez@repay.com" },
+  { name: "Katelyn Conati", role: "Visual Designer", kubra: "katelyn.conati@kubra.com", repay: "kconati@repay.com" },
+  { name: "Klariz Gapusan", role: "Visual Designer", kubra: "klariz.gapusan@kubra.com", repay: "kgapusan@repay.com" },
+  { name: "Victoria McDowell", role: "Visual Designer", kubra: "victoria.mcdowell@kubra.com", repay: "vmcdowell@repay.com" },
+];
+
+// Product Management — Head first, Lead PMs A-Z, Senior PMs A-Z, PMs A-Z (all by first name)
+const pm = [
+  { name: "Alfred Sawatzky", role: "Head of Product, KUBRA", kubra: "alfred.sawatzky@kubra.com", repay: "asawatzky@repay.com", unverified: true },
+  { name: "Cynthia Hayward", role: "Lead Product Manager", kubra: "cynthia.hayward@kubra.com", repay: "chayward@repay.com", unverified: true },
+  { name: "Todd Clement", role: "Lead Product Manager", kubra: "todd.clement@kubra.com", repay: "tclement@repay.com", unverified: true },
+  { name: "Bart Wiechec", role: "Senior Product Manager", kubra: "bart.wiechec@kubra.com", repay: "bwiechec@repay.com", unverified: true },
+  { name: "Chris Styka", role: "Senior Product Manager", kubra: "chris.styka@kubra.com", repay: "cstyka@repay.com", unverified: true },
+  { name: "Swetha Chellappa", role: "Senior Product Manager", kubra: "swetha.chellappa@kubra.com", repay: "schellappa@repay.com", unverified: true },
+  { name: "Aahan Suneja", role: "Product Manager", kubra: "aahan.suneja@kubra.com", repay: "asuneja@repay.com", unverified: true },
+  { name: "Jordan Hejka", role: "Product Manager", kubra: "jordan.hejka@kubra.com", repay: "jhejka@repay.com", unverified: true },
+  { name: "Zira Jauni", role: "Product Manager", kubra: "zira.jauni@kubra.com", repay: "zjauni@repay.com", unverified: true },
+];
+
+// Technology — SVP first, VPs A-Z by first name, Senior Manager last
+const tech = [
+  { name: "Harsha Remella", role: "SVP, Engineering, KUBRA", kubra: "sreharsha.remella@kubra.com", repay: "sremella@repay.com" },
+  { name: "Judes Soosaithasan", role: "Vice President, Payments Engineering", kubra: "judes.soosaithasan@kubra.com", repay: "sjudes@repay.com" },
+  { name: "Mihaela Pitigoi", role: "Vice President, Consumer Experience Engineering", kubra: "mihaela.pitigoi@kubra.com", repay: "mpitigoi@repay.com", unverified: true },
+  { name: "Peter Williams", role: "Vice President, Product Engineering", kubra: "peter.williams@kubra.com", repay: "pwilliams@repay.com", unverified: true },
+  { name: "Shawn Ito", role: "VP, Platform Adoption & Enablement", kubra: "shawn.ito@kubra.com", repay: "sito@repay.com", unverified: true },
+  { name: "Vitalii Djiguir", role: "Vice President, Foundation Engineering", kubra: "vitalii.djiguir@kubra.com", repay: "vdjiguir@repay.com", unverified: true },
+  { name: "Dhruv Shukla", role: "Senior Manager, Product Engineering", kubra: "dhruv.shukla@kubra.com", repay: "dshukla@repay.com", unverified: true },
+];
+
+// CX Team — SVPs A-Z by first name, VP, Senior Directors A-Z, others A-Z
+const cx = [
+  { name: "Jordan Khamra", role: "SVP, Sales", kubra: "jordan.khamra@kubra.com", repay: "wkhamra@repay.com" },
+  { name: "Nish Bandara", role: "SVP, Client Services & Solutions Architecture", kubra: "nishantha.bandara@kubra.com", repay: "nbandara@repay.com", unverified: true },
+  { name: "Steve Ryan", role: "SVP, Client Experience, KUBRA", kubra: "steve.ryan@kubra.com", repay: "sryan@repay.com", unverified: true },
+  { name: "Tara Mondelli", role: "Vice President, Client Success", kubra: "tara.mondelli@kubra.com", repay: "tmondelli@repay.com", unverified: true },
+  { name: "Anthony Mancini", role: "Senior Director, Client Success", kubra: "anthony.mancini@kubra.com", repay: "amancini@repay.com", unverified: true },
+  { name: "Erind Shkurti", role: "Senior Director, Client Solutions", kubra: "erind.shkurti@kubra.com", repay: "eshkurti@repay.com" },
+  { name: "Felicia Macie", role: "Senior Director, Client Solutions", kubra: "felicia.macie@kubra.com", repay: "fmacie@repay.com", unverified: true },
+  { name: "Dina Mistry", role: "Senior Project Manager", kubra: "dina.mistry@kubra.com", repay: "dmistry@repay.com", unverified: true },
+  { name: "Kenneth Harischandra", role: "Technical Lead, Client Solutions", kubra: "kenneth.harischandra@kubra.com", repay: "kharischandra@repay.com" },
+  { name: "Morsal Khairi", role: "Manager, Client Success", kubra: "morsal.khairi@kubra.com", repay: "mkhairi@repay.com", unverified: true },
+  { name: "Tarvinder Kaur", role: "Senior Project Manager Lead", kubra: "tarvinder.kaur@kubra.com", repay: "tlnu@repay.com" },
+  { name: "Tissan Ravindra", role: "Manager, Client Solutions", kubra: "tissan.ravindra@kubra.com", repay: "travindra@repay.com", unverified: true },
+];
+
+function makeCard(person) {
+  const copyTarget = person.repay || person.kubra;
+  const hintLabel = person.repay ? 'Click to copy REPAY email' : 'Click to copy KUBRA email';
+  const repayLabel = person.repay ? (person.unverified ? person.repay + ' *' : person.repay) : null;
+  return `
+    <div class="card" onclick="copyEmail(this, '${copyTarget}')">
+      <div class="name">${person.name}</div>
+      <div class="role">${person.role}</div>
+      <div class="emails">
+        ${repayLabel ? `<div class="email-row"><span class="badge repay">REPAY</span><span class="email-text">${repayLabel}</span></div>` : ''}
+        ${person.kubra ? `<div class="email-row"><span class="badge kubra">KUBRA</span><span class="email-text">${person.kubra}</span></div>` : ''}
+      </div>
+      <div class="copy-hint">${hintLabel}</div>
+      <div class="copied-label">Copied!</div>
+    </div>`;
+}
+
+// Legal — A-Z by first name (Vicky senior, Sumer reports to her)
+const legal = [
+  { name: "Vicky Edwards", role: "General Counsel, KUBRA", kubra: "vicky.edwards@kubra.com", repay: "vedwards@repay.com", unverified: true },
+  { name: "Sumer Jafri", role: "Legal Counsel", kubra: "sumer.jafri@kubra.com", repay: "sjafri@repay.com", unverified: true },
+];
+
+// Sourcing — VP first, then Manager
+const sourcing = [
+  { name: "Victor Chu", role: "VP, IT Financial Management and Corporate Services", kubra: "victor.chu@kubra.com", repay: "vchu@repay.com", unverified: true },
+  { name: "Suneeta Vinod", role: "Manager, Strategic Sourcing", kubra: "suneeta.vinod@kubra.com", repay: "svinod@repay.com", unverified: true },
+];
+
+document.getElementById('leadership').innerHTML = designLeadership.map(makeCard).join('');
+document.getElementById('ux-design').innerHTML = uxDesign.map(makeCard).join('');
+document.getElementById('ux-research').innerHTML = uxResearch.map(makeCard).join('');
+document.getElementById('ux-writing').innerHTML = uxWriting.map(makeCard).join('');
+document.getElementById('visual-design').innerHTML = visualDesign.map(makeCard).join('');
+document.getElementById('pm').innerHTML = pm.map(makeCard).join('');
+document.getElementById('tech').innerHTML = tech.map(makeCard).join('');
+document.getElementById('cx').innerHTML = cx.map(makeCard).join('');
+document.getElementById('legal').innerHTML = legal.map(makeCard).join('');
+document.getElementById('sourcing').innerHTML = sourcing.map(makeCard).join('');
+
+function copyEmail(card, email) {
+  navigator.clipboard.writeText(email).then(() => {
+    card.classList.add('copied');
+    setTimeout(() => card.classList.remove('copied'), 2000);
+  });
+}
+
+function copyGroup(row, emails) {
+  navigator.clipboard.writeText(emails).then(() => {
+    row.classList.add('copied');
+    row.querySelector('.copy-btn').textContent = 'Copied!';
+    setTimeout(() => { row.classList.remove('copied'); row.querySelector('.copy-btn').textContent = 'Copy'; }, 2000);
+  });
+}
+</script>
+</body>
+</html>
