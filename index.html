@@ -11,8 +11,10 @@
   header { margin-bottom: 32px; }
   header h1 { font-size: 22px; font-weight: 700; color: #0093C9; letter-spacing: -0.3px; }
   header p { font-size: 13px; color: #536372; margin-top: 4px; }
-  header p a { color: #0093C9; text-decoration: none; }
-  header p a:hover { text-decoration: underline; }
+  .inline-email { font-family: 'Courier New', monospace; font-size: 12px; color: #334155; }
+  .inline-copy { font-size: 11px; font-weight: 600; color: #0093C9; background: #e6f5fb; border: none; border-radius: 4px; padding: 3px 8px; margin-left: 4px; cursor: pointer; transition: background 0.15s; }
+  .inline-copy:hover { background: #cceaf7; }
+  .inline-copy.copied { color: #22c55e; background: #dcfce7; }
   .section { margin-bottom: 28px; }
   .section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #536372; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid #d1dbe6; }
   .subsection { margin-bottom: 20px; }
@@ -48,7 +50,7 @@
 <header>
   <h1>Product Design — Email Cheat Sheet</h1>
   <p>Click any card to copy the REPAY email (or KUBRA if no REPAY exists). Unverified REPAY emails marked with *</p>
-  <p>Don't see a collaborator we work with? Reach out to Jamel Singleton at <a href="mailto:jsingleton@repay.com">jsingleton@repay.com</a> and he'll add them.</p>
+  <p>Don't see a collaborator we work with? Reach out to Jamel Singleton and he'll add them: <span class="inline-email">jsingleton@repay.com</span><button class="inline-copy" onclick="copyInline(this, 'jsingleton@repay.com')">Copy</button></p>
 </header>
 
 <!-- GROUP COPY ROWS -->
@@ -275,6 +277,14 @@ function copyEmail(card, email) {
   navigator.clipboard.writeText(email).then(() => {
     card.classList.add('copied');
     setTimeout(() => card.classList.remove('copied'), 2000);
+  });
+}
+
+function copyInline(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.classList.add('copied');
+    btn.textContent = 'Copied!';
+    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = 'Copy'; }, 2000);
   });
 }
 
