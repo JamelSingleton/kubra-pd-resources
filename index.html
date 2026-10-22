@@ -12,9 +12,15 @@
   header h1 { font-size: 22px; font-weight: 700; color: #0093C9; letter-spacing: -0.3px; }
   header p { font-size: 13px; color: #536372; margin-top: 4px; }
   .inline-email { font-family: 'Courier New', monospace; font-size: 12px; color: #334155; }
-  .inline-copy { font-size: 11px; font-weight: 600; color: #0093C9; background: #e6f5fb; border: none; border-radius: 4px; padding: 3px 8px; margin-left: 4px; cursor: pointer; transition: background 0.15s; }
-  .inline-copy:hover { background: #cceaf7; }
-  .inline-copy.copied { color: #22c55e; background: #dcfce7; }
+  .inline-copy { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; margin-left: 4px; padding: 0; vertical-align: middle; background: transparent; border: none; border-radius: 6px; color: #536372; cursor: pointer; }
+  .inline-copy:hover, .inline-copy:focus-visible { background: rgba(83,99,114,0.12); }
+  .inline-copy svg { width: 14px; height: 14px; fill: currentColor; }
+  .inline-copy .icon-check { display: none; }
+  .inline-copy.copied { color: #1a7f37; }
+  .inline-copy.copied .icon-copy { display: none; }
+  .inline-copy.copied .icon-check { display: block; }
+  .inline-copy::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: #25292e; color: #ffffff; font-size: 12px; font-weight: 400; line-height: 1.4; padding: 4px 8px; border-radius: 6px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.1s; z-index: 10; }
+  .inline-copy:hover::after, .inline-copy:focus-visible::after, .inline-copy.copied::after { opacity: 1; }
   .section { margin-bottom: 28px; }
   .section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #536372; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid #d1dbe6; }
   .subsection { margin-bottom: 20px; }
@@ -50,7 +56,7 @@
 <header>
   <h1>Product Design — Email Cheat Sheet</h1>
   <p>Click any card to copy the REPAY email (or KUBRA if no REPAY exists). Unverified REPAY emails marked with *</p>
-  <p>Don't see a collaborator we work with? Reach out to Jamel Singleton and he'll add them: <span class="inline-email">jsingleton@repay.com</span><button class="inline-copy" onclick="copyInline(this, 'jsingleton@repay.com')">Copy</button></p>
+  <p>Don't see a collaborator we work with? Reach out to Jamel Singleton and he'll add them: <span class="inline-email">jsingleton@repay.com</span><button class="inline-copy" data-tip="Copy email" aria-label="Copy email" onclick="copyInline(this, 'jsingleton@repay.com')"><svg class="icon-copy" viewBox="0 0 16 16" aria-hidden="true"><path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"/><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"/></svg><svg class="icon-check" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"/></svg></button></p>
 </header>
 
 <!-- GROUP COPY ROWS -->
@@ -283,8 +289,8 @@ function copyEmail(card, email) {
 function copyInline(btn, text) {
   navigator.clipboard.writeText(text).then(() => {
     btn.classList.add('copied');
-    btn.textContent = 'Copied!';
-    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = 'Copy'; }, 2000);
+    btn.dataset.tip = 'Copied!';
+    setTimeout(() => { btn.classList.remove('copied'); btn.dataset.tip = 'Copy email'; }, 2000);
   });
 }
 
